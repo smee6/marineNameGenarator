@@ -23,6 +23,7 @@
         let b_;
         let c_;
         let name;
+        let mt, cmt;
 
         function randomNameGen() {
             a_ = a[Math.floor(Math.random() * a.length)];
@@ -30,13 +31,70 @@
             c_ = c[Math.floor(Math.random() * a.length)];
             document.getElementById('nametag').value = `악! 이병 ${a_}${b_}${c_} !!`
         }
+        window.addEventListener('keydown', e => {
+            if (e.keyCode === 87) {
+                //위
+                mt = document.getElementById('box').style.marginTop;
+                cmt = Number(mt.replace('px', '')) - 10;
+                if (cmt <= 0) {
+                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                    return;
+                }
+                document.getElementById('alret').innerHTML = ""
+                cmt += 'px';
+                document.getElementById('box').style.marginTop = cmt;
+            }
+            if (e.keyCode === 83) {
+                //아래
+                mt = document.getElementById('box').style.marginTop;
+                cmt = Number(mt.replace('px', '')) + 10;
+                if (cmt >= 380) {
+                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                    return;
+                }
+                document.getElementById('alret').innerHTML = ""
+                cmt += 'px';
+                document.getElementById('box').style.marginTop = cmt;
+            }
+            if (e.keyCode === 65) {
+                //왼쪽
+                mt = document.getElementById('box').style.marginLeft;
+                cmt = Number(mt.replace('px', '')) - 10;
+                if (cmt <= 0) {
+                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                    return;
+                }
+                document.getElementById('alret').innerHTML = ""
+                cmt += 'px';
+                document.getElementById('box').style.marginLeft = cmt;
+            }
+            if (e.keyCode === 68) {
+                //오른쪽
+                mt = document.getElementById('box').style.marginLeft;
+                cmt = Number(mt.replace('px', '')) + 10;
+                if (cmt >= 450) {
+                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                    return;
+                }
+                document.getElementById('alret').innerHTML = ""
+                cmt += 'px';
+                document.getElementById('box').style.marginLeft = cmt;
+            }
+        })
     </script>
 </head>
 
 <body>
     당신의 강력한 해병 이름을 만들어 보세요.<br>
     <button onclick="randomNameGen()">아쎄이!</button>
+    <br>
     <input id="nametag" />
+    <br>
+    당신의 강한 해병이 전투 수영을 한다.
+    <div id="frame" style="width: 500px; height: 500px; background-color: blue; padding-top: 5px; overflow: hidden;">
+        <div id="box" style="width: 50px; height: 130px; background-color: red; margin: 150px;">무적 해병</div>
+    </div>
+    <h1 id="alret" style="color: red;"></h1>
 </body>
 
 </html>
