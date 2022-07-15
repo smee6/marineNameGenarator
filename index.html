@@ -37,23 +37,20 @@
             document.getElementById('box').innerHTML = `${a_}${b_}${c_}`
         }
 
-        function up(e) {
-
+        function up() {
             //위
             mt = document.getElementById('box').style.marginTop;
             cmt = Number(mt.replace('px', '')) - 5;
-            if (cmt <= 0) {
+            if (cmt <= -10) {
                 document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
                 return;
             }
             document.getElementById('alret').innerHTML = ""
             cmt += 'px';
             document.getElementById('box').style.marginTop = cmt;
-
         }
 
-        function down(e) {
-
+        function down() {
             //아래
             mt = document.getElementById('box').style.marginTop;
             cmt = Number(mt.replace('px', '')) + 5;
@@ -64,26 +61,22 @@
             document.getElementById('alret').innerHTML = ""
             cmt += 'px';
             document.getElementById('box').style.marginTop = cmt;
-
         }
 
-        function left(e) {
-
+        function left() {
             //왼쪽
             mt = document.getElementById('box').style.marginLeft;
             cmt = Number(mt.replace('px', '')) - 5;
-            if (cmt <= 0) {
+            if (cmt <= -5) {
                 document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
                 return;
             }
             document.getElementById('alret').innerHTML = ""
             cmt += 'px';
             document.getElementById('box').style.marginLeft = cmt;
-
         }
 
-        function right(e) {
-
+        function right() {
             //오른쪽
             mt = document.getElementById('box').style.marginLeft;
             cmt = Number(mt.replace('px', '')) + 5;
@@ -98,16 +91,16 @@
         }
         window.addEventListener('keydown', e => {
             if (e.keyCode === 87) {
-                up(e);
+                up();
             }
             if (e.keyCode === 83) {
-                down(e);
+                down();
             }
             if (e.keyCode === 65) {
-                left(e);
+                left();
             }
             if (e.keyCode === 68) {
-                right(e);
+                right();
             }
         })
     </script>
