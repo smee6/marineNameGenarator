@@ -33,72 +33,110 @@
             a_ = a[Math.floor(Math.random() * a.length)];
             b_ = b[Math.floor(Math.random() * a.length)];
             c_ = c[Math.floor(Math.random() * a.length)];
-            document.getElementById('nametag').value = `악! 이병 ${a_}${b_}${c_} !!`
+            document.getElementById('nametag').innerHTML = `??? :아니...나는 해병 !! 악! 이병 ${a_}${b_}${c_} !!`
+            document.getElementById('box').innerHTML = `${a_}${b_}${c_}`
+        }
+
+        function up(e) {
+
+            //위
+            mt = document.getElementById('box').style.marginTop;
+            cmt = Number(mt.replace('px', '')) - 5;
+            if (cmt <= 0) {
+                document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                return;
+            }
+            document.getElementById('alret').innerHTML = ""
+            cmt += 'px';
+            document.getElementById('box').style.marginTop = cmt;
+
+        }
+
+        function down(e) {
+
+            //아래
+            mt = document.getElementById('box').style.marginTop;
+            cmt = Number(mt.replace('px', '')) + 5;
+            if (cmt >= 160) {
+                document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                return;
+            }
+            document.getElementById('alret').innerHTML = ""
+            cmt += 'px';
+            document.getElementById('box').style.marginTop = cmt;
+
+        }
+
+        function left(e) {
+
+            //왼쪽
+            mt = document.getElementById('box').style.marginLeft;
+            cmt = Number(mt.replace('px', '')) - 5;
+            if (cmt <= 0) {
+                document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                return;
+            }
+            document.getElementById('alret').innerHTML = ""
+            cmt += 'px';
+            document.getElementById('box').style.marginLeft = cmt;
+
+        }
+
+        function right(e) {
+
+            //오른쪽
+            mt = document.getElementById('box').style.marginLeft;
+            cmt = Number(mt.replace('px', '')) + 5;
+            if (cmt >= 190) {
+                document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
+                return;
+            }
+            document.getElementById('alret').innerHTML = ""
+            cmt += 'px';
+            document.getElementById('box').style.marginLeft = cmt;
+
         }
         window.addEventListener('keydown', e => {
             if (e.keyCode === 87) {
-                //위
-                mt = document.getElementById('box').style.marginTop;
-                cmt = Number(mt.replace('px', '')) - 10;
-                if (cmt <= 0) {
-                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
-                    return;
-                }
-                document.getElementById('alret').innerHTML = ""
-                cmt += 'px';
-                document.getElementById('box').style.marginTop = cmt;
+                up(e);
             }
             if (e.keyCode === 83) {
-                //아래
-                mt = document.getElementById('box').style.marginTop;
-                cmt = Number(mt.replace('px', '')) + 10;
-                if (cmt >= 380) {
-                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
-                    return;
-                }
-                document.getElementById('alret').innerHTML = ""
-                cmt += 'px';
-                document.getElementById('box').style.marginTop = cmt;
+                down(e);
             }
             if (e.keyCode === 65) {
-                //왼쪽
-                mt = document.getElementById('box').style.marginLeft;
-                cmt = Number(mt.replace('px', '')) - 10;
-                if (cmt <= 0) {
-                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
-                    return;
-                }
-                document.getElementById('alret').innerHTML = ""
-                cmt += 'px';
-                document.getElementById('box').style.marginLeft = cmt;
+                left(e);
             }
             if (e.keyCode === 68) {
-                //오른쪽
-                mt = document.getElementById('box').style.marginLeft;
-                cmt = Number(mt.replace('px', '')) + 10;
-                if (cmt >= 450) {
-                    document.getElementById('alret').innerHTML = "작전지역을 이탈하지 마라... 돌아가라 해병..."
-                    return;
-                }
-                document.getElementById('alret').innerHTML = ""
-                cmt += 'px';
-                document.getElementById('box').style.marginLeft = cmt;
+                right(e);
             }
         })
     </script>
 </head>
 
-<body>
+<h2>
     당신의 강력한 해병 이름을 만들어 보세요.<br>
-    <button onclick="randomNameGen()">아쎄이!</button>
-    <br>
-    <input id="nametag" />
-    <br>
-    당신의 강한 해병이 전투 수영을 한다.
-    <div id="frame" style="width: 500px; height: 500px; background-color: blue; padding-top: 5px; overflow: hidden;">
-        <div id="box" style="width: 50px; height: 130px; background-color: red; margin: 150px;">무적 해병</div>
+    자원입대 => <button onclick="randomNameGen()" style="width: 100px; height: 50px;"> ... 아쎄이!!!</button>
+    <= 자원입대 <br>
+        <h3 id="nametag"> ??? : 나는 민간인인데?</h3>
+</h2>
+<br>
+
+<div id="frame" style="width: 200px; height: 200px; background-color: blue; padding-top: 5px; overflow: hidden;">
+    <div id="box"
+        style="width: 15px; height: 50px; background-color: red; margin: 15px; color:aliceblue; text-overflow: ellipsis; font-size: small;">
     </div>
-    <h1 id="alret" style="color: red;"></h1>
+</div>
+<br>
+당신의 강한 해병이 전투 수영을 한다.<br>
+WASD로 이동하라.(모바일이면 버튼을 기합으로 터치하라!)<br>
+<button>&nbsp;&nbsp;</button>
+<button onclick="up()">W</button>
+<button>&nbsp;&nbsp;</button><br>
+<button onclick="left()">A</button>
+<button onclick="down()">S</button>
+<button onclick="right()">D</button>
+<br>
+<h1 id="alret" style="color: red;"></h1>
 </body>
 
 </html>
